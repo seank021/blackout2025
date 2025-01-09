@@ -1,7 +1,21 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import '../src/globals.css';
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/home";
+import About from "./pages/etc/about";
+
 const App = () => {
   return (
-    <div className="text-3xl font-bold h-[100vh] flex items-center justify-center">
-      Hello, BlackOut!
+    <div className="container-col">
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </div>
   );
 }
