@@ -20,7 +20,7 @@ const My = ({ setIsLoggedIn }) => {
                 Log Out
             </button>
         </div>
-    )
-}
+    );
+};
 
 export default My;

@@ -12,14 +12,10 @@ const Mypage = () => {
     }, []);
 
     if (!isLoggedIn) {
-        return (
-            <Login setIsLoggedIn={setIsLoggedIn} />
-        );
+        return <Login setIsLoggedIn={setIsLoggedIn} />;
     }
 
-    return (
-        <My setIsLoggedIn={setIsLoggedIn} />
-    );
+    return <My setIsLoggedIn={setIsLoggedIn} />;
 };
 
 export default Mypage;
