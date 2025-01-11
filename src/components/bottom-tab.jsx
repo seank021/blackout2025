@@ -1,9 +1,9 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
 /* icons */
-import payment from '../assets/icons/payment.png';
-import home from '../assets/icons/home.png';
-import mypage from '../assets/icons/mypage.png';
+import payment from '../assets/icons/payment.svg';
+import home from '../assets/icons/home.svg';
+import mypage from '../assets/icons/mypage.svg';
 
 const BottomTab = () => {
     const location = useLocation();
@@ -32,8 +32,8 @@ const BottomTab = () => {
                     cursor: 'pointer',
                 }}
             >
-                <img src={payment} alt="Payment" style={{ height: '24px' }} />
-                <div>Payment</div>
+                <img src={payment} alt="Payment" style={{ height: '26px' }} />
+                <div className='text-sm'>선결제</div>
             </div>
             <div
                 onClick={() => handleNavigation('/')}
@@ -47,7 +47,7 @@ const BottomTab = () => {
                 }}
             >
                 <img src={home} alt="Home" style={{ height: '24px' }} />
-                <div>Home</div>
+                <div className='text-sm'>홈</div>
             </div>
             <div
                 onClick={() => handleNavigation('/mypage')}
@@ -61,7 +61,7 @@ const BottomTab = () => {
                 }}
             >
                 <img src={mypage} alt="Mypage" style={{ height: '24px' }} />
-                <div>My Page</div>
+                <div className='text-sm'>My</div>
             </div>
         </div>
     );
