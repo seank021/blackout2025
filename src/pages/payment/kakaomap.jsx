@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import PlacesList from '../../components/PlacesList';
 import SearchForm from '../../components/SearchForm';
+import locationIcon from '../../assets/icons/curpos.svg';
 
 const Kakaomap = () => {
     const [currentMarker, setCurrentMarker] = useState(null);
@@ -110,7 +111,7 @@ const Kakaomap = () => {
 
         // 현재 위치 버튼 생성
         const locationBtn = document.createElement('button');
-        locationBtn.innerHTML = '현재 위치';
+
         locationBtn.style.cssText = `
             position: absolute;
             bottom: 30px;
@@ -127,6 +128,11 @@ const Kakaomap = () => {
             justify-content: center;
             align-items: center;
         `;
+        const locationIcons = document.createElement('img');
+        locationIcons.src = locationIcon;
+        locationIcons.alt = 'Location Icon';
+        locationIcons.className = 'w-5 h-5 mt-[2px]';
+        locationBtn.appendChild(locationIcons);
 
         const handleClick = () => getCurrentLocation();
         locationBtn.addEventListener('click', handleClick);
