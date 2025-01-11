@@ -16,8 +16,8 @@ import PublicStore from './pages/home/public-store';
 import PrivateStore from './pages/home/private-store';
 import PrivateKeyInput from './pages/payment/private-key-Input';
 import PaymentsCountInput from './pages/payment/payments-count-input';
-import SelectStoreType from './pages/payment/select-store-type';
-import PasswordInput from './pages/payment/password-input';
+import SelectStoreType from './pages/payment/SelectStoreType';
+import PasswordInput from './pages/payment/passwordInput';
 
 const App = () => {
     const [showSplash, setShowSplash] = useState(true);
@@ -47,8 +47,8 @@ const App = () => {
                     <Route path="/payment" element={<Payment />} />
                     <Route path="/payment/private-key-input" element={<PrivateKeyInput />} />
                     <Route path="/payment/payments-count-input" element={<PaymentsCountInput />} />
-                    <Route path="/payment/password-input" element={<SelectStoreType />} />
-                    <Route path="/payment/select-store-type" element={<PasswordInput />} />
+                    <Route path="/payment/select-store-type" element={<SelectStoreType />} />
+                    <Route path="/payment/password-input" element={<PasswordInput />} />
                     <Route path="/mypage" element={<Mypage />} />
                     <Route path="signup" element={<Signup />} />
                 </Routes>

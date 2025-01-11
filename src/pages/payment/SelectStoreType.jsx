@@ -2,10 +2,11 @@ import React, { useRef } from 'react';
 import backBtn from '../../assets/icons/backBtn.svg';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-function PasswordInput() {
+function SelectStoreType() {
     const navigate = useNavigate();
 
     const { place } = useLocation().state;
+
     return (
         <div className="container-col items-center justify-center">
             <img className="absolute top-[20px] left-[20px]" src={backBtn} alt="logo" onClick={() => navigate(-1)} />
@@ -61,4 +62,4 @@ function PasswordInput() {
     );
 }
 
-export default PasswordInput;
+export default SelectStoreType;
