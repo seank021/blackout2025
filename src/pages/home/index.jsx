@@ -35,28 +35,32 @@ const Home = () => {
                 {/* Small Cards */}
                 <div className="small-card-container">
                     <div className="small-card">
-                        <div className="flex flex-col">
-                            <div className="flex items-center">
+                        <div className="flex flex-col w-[100%]">
+                            <div className="flex items-center mb-[3px]">
                                 <h2 className="card-title-small">퍼블릭 스토어</h2>
                                 <img src={arrow} alt="Arrow" className="w-[12px] h-[24px] ml-[5px]" />
                             </div>
-                            <p className="card-text-small mt-[3px]">
-                                모든 사람이{'\n'}사용 가능한 매장으로,{'\n'}비밀번호 없이{'\n'}이용 가능해요!
-                            </p>
+                            <div className="flex items-center justify-between">
+                                <p className="card-text-small">
+                                    비밀번호 없이{'\n'}모두가 자유롭게{'\n'}이용 가능해요!{'\n'}
+                                </p>
+                                <img src={publicStoreIcon} alt="Public Store" className="w-[30px] h-[46px]" />
+                            </div>
                         </div>
-                        <img src={publicStoreIcon} alt="Public Store" className="w-[30px] h-[46px]" />
                     </div>
                     <div className="small-card">
-                        <div>
-                            <div className="flex items-center">
+                        <div className="flex flex-col w-[100%]">
+                            <div className="flex items-center mb-[3px]">
                                 <h2 className="card-title-small">프라이빗 스토어</h2>
                                 <img src={arrow} alt="Arrow" className="w-[12px] h-[24px] ml-[5px]" />
                             </div>
-                            <p className="card-text-small mt-[3px]">
-                                이미 선결제가{'\n'}완료된 매장으로,{'\n'}비밀번호를 통해{'\n'}이용 가능해요!
-                            </p>
+                            <div className="flex items-center justify-between">
+                                <p className="card-text-small">
+                                    비밀번호를 입력해야{'\n'}이용 가능해요!{'\n'}
+                                </p>
+                                <img src={privateStoreIcon} alt="Private Store" className="w-[30px] h-[41px]" />
+                            </div>
                         </div>
-                        <img src={privateStoreIcon} alt="Private Store" className="w-[30px] h-[41px]" />
                     </div>
                 </div>
             </div>
