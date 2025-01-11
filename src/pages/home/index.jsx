@@ -1,11 +1,16 @@
 import '../../../src/styles/globals.css';
 import '../../../src/styles/home.css';
 import logo from '../../assets/icons/logo-home.svg';
-import search from '../../assets/icons/search.svg';
 import arrow from '../../assets/icons/right-arrow.svg';
 import folderIcon from '../../assets/images/folder.svg';
 import publicStoreIcon from '../../assets/images/map.svg';
 import privateStoreIcon from '../../assets/images/lock.svg';
+
+/* pages */
+import MyStore from './my-store';
+import PublicStore from './public-store';
+import PrivateStore from './private-store';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
@@ -19,7 +24,7 @@ const Home = () => {
             {/* Cards */}
             <div className="card-container">
                 {/* My Store */}
-                <div className="large-card">
+                <Link className="large-card" to="/my-store">
                     <div className='flex flex-col'>
                         <div className="flex items-center">
                             <h2 className="card-title-big">마이 스토어</h2>
@@ -30,11 +35,11 @@ const Home = () => {
                         </p>
                     </div>
                     <img src={folderIcon} alt="My Store" className="w-[90px] h-[80px]" />
-                </div>
+                </Link>
 
                 {/* Small Cards */}
                 <div className="small-card-container">
-                    <div className="small-card">
+                    <Link className="small-card" to="/public-store">
                         <div className="flex flex-col w-[100%]">
                             <div className="flex items-center mb-[3px]">
                                 <h2 className="card-title-small">퍼블릭 스토어</h2>
@@ -47,8 +52,8 @@ const Home = () => {
                                 <img src={publicStoreIcon} alt="Public Store" className="w-[30px] h-[46px]" />
                             </div>
                         </div>
-                    </div>
-                    <div className="small-card">
+                    </Link>
+                    <Link className="small-card" to="/private-store">
                         <div className="flex flex-col w-[100%]">
                             <div className="flex items-center mb-[3px]">
                                 <h2 className="card-title-small">프라이빗 스토어</h2>
@@ -61,7 +66,7 @@ const Home = () => {
                                 <img src={privateStoreIcon} alt="Private Store" className="w-[30px] h-[41px]" />
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
         </div>

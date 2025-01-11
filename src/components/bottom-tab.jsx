@@ -39,7 +39,11 @@ const BottomTab = () => {
                 onClick={() => handleNavigation('/')}
                 style={{
                     textDecoration: 'none',
-                    color: location.pathname === '/' ? '#007BFF' : '#000',
+                    color: location.pathname === '/'
+                            || location.pathname === '/my-store'
+                            || location.pathname === '/public-store'
+                            || location.pathname === '/private-store'
+                            ? '#007BFF' : '#000',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
