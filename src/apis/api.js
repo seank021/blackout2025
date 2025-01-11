@@ -26,3 +26,19 @@ export const logIn = async ({ username, password }) => {
         console.error(error);
     }
 }
+
+// get my store
+export const getMyStore = async () => {
+    const accessToken = localStorage.getItem("access_token");
+    try {
+        const response = await axios.get(`${API_URL}/stores/me/`, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        });
+        return response;
+    } catch (error) {
+        console.error(error);
+    }
+}
+

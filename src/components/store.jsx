@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../assets/icons/logo-small.svg';
 import SearchForm from './SearchForm';
 import StoreItem from './storeItem';
 import { useNavigate } from 'react-router-dom';
@@ -41,13 +40,16 @@ const dummyPrivateStore = [
 
 function Store({ title }) {
     const navigate = useNavigate();
+
     return (
         <div className="w-full h-full">
             <img className="absolute top-[20px] left-[20px]" src={backBtn} alt="logo" onClick={() => navigate('/')} />
             <div className="flex items-center justify-center gap-[100px] mt-[25px]">
                 <div className="text-black text-lg font-bold font-['Inter'] leading-7 mt-[2px]">{title} 스토어</div>
             </div>
+
             <SearchForm onSearch={() => {}} />
+
             <div className="mt-[10px] flex flex-col items-center justify-center gap-[0px]">
                 {title === '프라이빗'
                     ? dummyPrivateStore.map((store, index) => <StoreItem key={index} store={store} />)
