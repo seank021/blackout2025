@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import dropdown from '../assets/icons/dropdown.png';
 import '../styles/store.css';
 
-function StoreItem({ store, totalAmount }) {
+function StoreItem({ store, totalAmount, title }) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     const toggleDropdown = () => {
@@ -44,24 +44,56 @@ function StoreItem({ store, totalAmount }) {
                 }`}
             >
                 {isDropdownOpen &&
-                    (store.my_prepay.length > 0 ? (
-                        <ul>
-                            {store.my_prepay.map((prepay) => (
-                                <li
-                                    key={prepay.id}
-                                    className="flex justify-between items-center border-b border-gray-200 py-2"
-                                >   
-                                    <div className='flex flex-row items-center gap-1'>
-                                        <span className="text-sm text-gray-700">paid by</span>
-                                        <span className="text-sm text-gray-800 font-bold">{prepay.username}</span>
-                                    </div>
-                                    <span className="text-sm text-blue-500">{prepay.credit}원</span>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <div className="text-gray-500 text-center">선결제 정보가 없습니다.</div>
-                    ))}
+                    title === '마이' &&
+                        store.my_prepay.length > 0 ? (
+                            <ul>
+                                {store.my_prepay.map((prepay) => (
+                                    <li
+                                        key={prepay.id}
+                                        className="flex justify-between items-center border-b border-gray-200 py-2"
+                                    >   
+                                        <div className='flex flex-row items-center gap-1'>
+                                            <span className="text-sm text-gray-700">paid by</span>
+                                            <span className="text-sm text-gray-800 font-bold">{prepay.username}</span>
+                                        </div>
+                                        <span className="text-sm text-blue-500">{prepay.credit}원</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : title === '퍼블릭' && store.public_prepay.length > 0 ? (
+                            <ul>
+                                {store.public_prepay.map((prepay) => (
+                                    <li
+                                        key={prepay.id}
+                                        className="flex justify-between items-center border-b border-gray-200 py-2"
+                                    >
+                                        <div className='flex flex-row items-center gap-1'>
+                                            <span className="text-sm text-gray-700">paid by</span>
+                                            <span className="text-sm text-gray-800 font-bold">{prepay.username}</span>
+                                        </div>
+                                        <span className="text-sm text-blue-500">{prepay.credit}원</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : title === '프라이빗' && store.private_prepay.length > 0 ? (
+                            <ul>
+                                {store.private_prepay.map((prepay) => (
+                                    <li
+                                        key={prepay.id}
+                                        className="flex justify-between items-center border-b border-gray-200 py-2"
+                                    >
+                                        <div className='flex flex-row items-center gap-1'>
+                                            <span className="text-sm text-gray-700">paid by</span>
+                                            <span className="text-sm text-gray-800 font-bold">{prepay.username}</span>
+                                        </div>
+                                        <span className="text-sm text-blue-500">{prepay.credit}원</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <div className="text-gray-500 text-center">선결제 정보가 없습니다.</div>
+                        )
+                }    
             </div>
         </div>
     );

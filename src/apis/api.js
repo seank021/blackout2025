@@ -29,8 +29,8 @@ export const logIn = async ({ username, password }) => {
     }
 }
 
-// get my store
-export const getMyStore = async ({ title }) => {
+// get store
+export const getStore = async ({ title }) => {
     const accessToken = localStorage.getItem("accessToken");
     console.log(accessToken);
 
