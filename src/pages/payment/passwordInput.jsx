@@ -21,7 +21,7 @@ function PasswordInput() {
 
     const handleAddCredit = async () => {
         setIsLoading(true);
-        const contractAddress = '0xC84296F3A6B769CF798B7061681229A558DDe264';
+        const contractAddress = '0x0aaFfbcF6050dAe35fc58CF1Fc12f103AFAdADF4';
         const walletAddress = localStorage.getItem('walletAddress');
 
         try {

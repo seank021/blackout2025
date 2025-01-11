@@ -32,7 +32,7 @@ function PrivateKeyInput() {
                         </div>
                         <input
                             onChange={e => setPrivateKey(e.target.value)}
-                            className="w-[80vw] rounded-[12px] border-2 border-gray-400 self-stretch text-gray-400 text-[15px] font-bold font-['Inter'] leading-7 px-[10px] py-[5px]"
+                            className="w-[80vw] rounded-[12px] border-2 border-gray-400 self-stretch text-black-400 text-[15px] font-bold font-['Inter'] leading-7 px-[10px] py-[5px]"
                         />
                     </div>
                     <div className="flex flex-col items-center justify-center gap-[3px]  ">
