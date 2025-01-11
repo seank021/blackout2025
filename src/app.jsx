@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react';
 import '../src/globals.css';
 
 /* components */
-import Header from './components/header';
-import Footer from './components/footer';
 import BottomTab from './components/bottom-tab';
 
 /* pages */
@@ -42,7 +40,6 @@ const App = () => {
     return (
         <div className="container-col">
             <BrowserRouter>
-                <Header />
                 <Routes>
                     <Route path="/" element={accessToken ? <Home /> : <Navigate to="/mypage" />} />
                     <Route path="/payment" element={accessToken ? <Payment /> : <Navigate to="/mypage" />} />
@@ -51,7 +48,6 @@ const App = () => {
                         element={<Mypage onLogin={() => setAccessToken(localStorage.getItem('accessToken'))} />}
                     />
                 </Routes>
-                <Footer />
                 <BottomTab />
             </BrowserRouter>
         </div>
