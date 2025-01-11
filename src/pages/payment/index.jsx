@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import "../../../src/globals.css";
+import { useEffect } from 'react';
+import '../../../src/globals.css';
 
 const Payment = () => {
     useEffect(() => {
@@ -9,12 +9,9 @@ const Payment = () => {
 
     function printKakaomap() {
         if (window.kakao) {
-            var container = document.getElementById("map");
+            var container = document.getElementById('map');
             var options = {
-                center: new window.kakao.maps.LatLng(
-                37.365264512305174,
-                127.10676860117488
-                ),
+                center: new window.kakao.maps.LatLng(37.365264512305174, 127.10676860117488),
                 level: 3,
             };
             var map = new window.kakao.maps.Map(container, options);
@@ -23,7 +20,7 @@ const Payment = () => {
 
     return (
         <div className="container-col">
-            <div id="map" style={{ height: "400px" }}></div>
+            <div id="map" style={{ height: '400px' }}></div>
         </div>
     );
 };

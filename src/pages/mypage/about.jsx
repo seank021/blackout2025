@@ -1,4 +1,4 @@
-import '../../../src/globals.css'
+import '../../../src/globals.css';
 
 const About = () => {
     return (
@@ -7,6 +7,6 @@ const About = () => {
             <p>This is about page</p>
         </div>
     );
-}
+};
 
 export default About;
