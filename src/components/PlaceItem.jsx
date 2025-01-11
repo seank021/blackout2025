@@ -1,28 +1,36 @@
 const PlaceItem = ({ place, index, onClick }) => {
     return (
         <li
-            className="relative border border-gray-200 rounded-lg overflow-hidden cursor-pointer hover:bg-gray-50 transition-colors"
+            className="w-full h-[111px] relative border-b border-[#cccccc] overflow-hidden cursor-pointer hover:bg-gray-50"
             onClick={onClick}
         >
-            <div className="flex items-start p-4">
-                <span className="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                    {index + 1}
-                </span>
-                <div className="flex-1 min-w-0">
-                    <h5 className="font-bold text-gray-900 truncate">{place.place_name}</h5>
-                    {place.road_address_name ? (
-                        <>
-                            <span className="block text-sm text-gray-700 truncate">{place.road_address_name}</span>
-                            <span className="block text-sm text-gray-500 truncate">{place.address_name}</span>
-                        </>
-                    ) : (
-                        <span className="block text-sm text-gray-700 truncate">{place.address_name}</span>
-                    )}
-                    <span className="block text-sm text-green-600">{place.phone}</span>
-                    {place.distance && (
-                        <span className="block text-sm text-blue-600">{(place.distance / 1000).toFixed(1)}km</span>
-                    )}
+            <div className="absolute left-[24px] top-[13px] flex flex-col gap-1">
+                <div className="flex items-center gap-[5px]">
+                    <div className="text-black text-[15px] font-bold leading-7">{place.place_name}</div>
+                    <div className="text-black/40 text-[10px] font-normal leading-7">
+                        {place.category_name?.split('>').pop().trim()}
+                    </div>
                 </div>
+                <div className="h-[62px] flex-col justify-start items-start inline-flex">
+                    {place.road_address_name && (
+                        <div className="self-stretch text-[#666666] text-[10px] font-normal font-['Inter'] leading-5">
+                            {place.road_address_name}
+                        </div>
+                    )}
+                    <div className="self-stretch text-[#666666] text-[10px] font-normal font-['Inter'] leading-5">
+                        {place.address_name}
+                    </div>
+                    <div className="self-stretch text-[#0763c2] text-[10px] font-normal font-['Inter'] leading-5">
+                        {place.phone}
+                    </div>
+                </div>
+            </div>
+            <div className="absolute right-[24px] bottom-[23px]">
+                <button className="w-[89px] h-[31px] px-5 py-[3px] bg-[#0763c2] rounded-[40px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
+                    <span className="text-white text-[11px] font-medium leading-7 relative bottom-[2px]">
+                        선결제하기
+                    </span>
+                </button>
             </div>
         </li>
     );

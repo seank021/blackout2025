@@ -33,10 +33,8 @@ const Home = () => {
                 {/* My Store */}
                 <div className="large-card">
                     <div>
-                        <h2 className="card-title-big">마이 스토어  &gt;</h2>
-                        <p className="card-text-big mt-[10px]">
-                            이미 등록된 가게로, 자유롭게{'\n'}사용이 가능해요
-                        </p>
+                        <h2 className="card-title-big">마이 스토어 &gt;</h2>
+                        <p className="card-text-big mt-[10px]">이미 등록된 가게로, 자유롭게{'\n'}사용이 가능해요</p>
                     </div>
                     <img src={folderIcon} alt="My Store" className="w-[88px] h-[80px]" />
                 </div>
@@ -45,10 +43,9 @@ const Home = () => {
                 <div className="small-card-container">
                     <div className="small-card">
                         <div>
-                            <h2 className="card-title-small">퍼블릭 스토어  &gt;</h2>
+                            <h2 className="card-title-small">퍼블릭 스토어 &gt;</h2>
                             <p className="card-text-small">
-                                모든 사람이 사용 가능한 매장으로, 비밀번호 없이
-                                이용 가능해요
+                                모든 사람이 사용 가능한 매장으로, 비밀번호 없이 이용 가능해요
                             </p>
                         </div>
                         <img src={publicStoreIcon} alt="Public Store" className="w-[30px] h-[46px]" />
@@ -57,8 +54,7 @@ const Home = () => {
                         <div>
                             <h2 className="card-title-small">프라이빗 스토어 &gt;</h2>
                             <p className="card-text-small">
-                                이미 선결제가 완료된 매장으로, 비밀번호를 통해
-                                이용 가능해요
+                                이미 선결제가 완료된 매장으로, 비밀번호를 통해 이용 가능해요
                             </p>
                         </div>
                         <img src={privateStoreIcon} alt="Private Store" className="w-[30px] h-[41px]" />

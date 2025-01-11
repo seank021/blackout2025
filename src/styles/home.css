@@ -56,7 +56,7 @@
 .sub-text {
     text-align: center;
     font-size: 13.6px;
-    color: #6B7280;
+    color: #6b7280;
     margin-bottom: 50px;
 }
 
@@ -112,12 +112,12 @@
 /* Card Text */
 .card-text-big {
     font-size: 14px;
-    color: #4B5563AB;
+    color: #4b5563ab;
     white-space: pre-wrap;
 }
 
 .card-text-small {
     font-size: 8px;
-    color: #4B5563AB;
+    color: #4b5563ab;
     white-space: pre-wrap;
 }

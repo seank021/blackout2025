@@ -33,7 +33,7 @@ const BottomTab = () => {
                 }}
             >
                 <img src={payment} alt="Payment" style={{ height: '26px' }} />
-                <div className='text-sm'>선결제</div>
+                <div className="text-sm">선결제</div>
             </div>
             <div
                 onClick={() => handleNavigation('/')}
@@ -47,7 +47,7 @@ const BottomTab = () => {
                 }}
             >
                 <img src={home} alt="Home" style={{ height: '24px' }} />
-                <div className='text-sm'>홈</div>
+                <div className="text-sm">홈</div>
             </div>
             <div
                 onClick={() => handleNavigation('/mypage')}
@@ -61,7 +61,7 @@ const BottomTab = () => {
                 }}
             >
                 <img src={mypage} alt="Mypage" style={{ height: '24px' }} />
-                <div className='text-sm'>My</div>
+                <div className="text-sm">My</div>
             </div>
         </div>
     );

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import PlacesList from '../../components/PlacesList';
+import SearchForm from '../../components/SearchForm';
 
 const Kakaomap = () => {
     const [currentMarker, setCurrentMarker] = useState(null);
@@ -8,6 +9,7 @@ const Kakaomap = () => {
     const [infowindow, setInfowindow] = useState(null);
     const [places, setPlaces] = useState([]);
     const [userPosition, setUserPosition] = useState(null);
+    const [hasSearched, setHasSearched] = useState(false);
 
     // useRef를 사용하여 최신 값을 참조
     const mapRef = useRef(null);
@@ -168,7 +170,39 @@ const Kakaomap = () => {
         };
     }, []); // 빈 의존성 배열
 
-    const searchPlaces = () => {
+    // 지도 크기 변경 감지 및 처리
+    useEffect(() => {
+        if (!map || !currentMarker) return;
+
+        const handleResize = () => {
+            const position = currentMarker.getPosition();
+            map.setCenter(position);
+        };
+
+        // ResizeObserver를 사용하여 지도 컨테이너의 크기 변경 감지
+        const mapContainer = document.getElementById('map');
+        const observer = new ResizeObserver(() => {
+            setTimeout(() => {
+                map.relayout();
+                if (currentMarker) {
+                    const position = currentMarker.getPosition();
+                    map.setCenter(position);
+                }
+            }, 100);
+        });
+
+        observer.observe(mapContainer);
+
+        // 창 크기 변경 이벤트도 처리
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [map, currentMarker]);
+
+    const searchPlaces = useCallback(() => {
         const keyword = document.getElementById('keyword').value;
 
         if (!keyword.replace(/^\s+|\s+$/g, '')) {
@@ -176,28 +210,39 @@ const Kakaomap = () => {
             return false;
         }
 
-        ps.keywordSearch(keyword, placesSearchCB);
-    };
+        ps.keywordSearch(keyword, (data, status, pagination) => {
+            if (status === window.kakao.maps.services.Status.OK) {
+                setPlaces(data);
+                setHasSearched(true);
 
-    const placesSearchCB = (data, status) => {
-        if (status === kakao.maps.services.Status.OK) {
-            // 검색된 장소 데이터 처리
-            let searchResults = data;
+                // 검색 결과의 첫 번째 장소로 지도 중심 이동
+                const firstPlace = data[0];
+                const placePosition = new window.kakao.maps.LatLng(firstPlace.y, firstPlace.x);
 
-            // 현재 위치가 있다면 거리순 정렬
-            if (userPosition) {
-                searchResults = data
-                    .map(place => {
-                        const placePos = new kakao.maps.LatLng(place.y, place.x);
-                        const distance = getDistance(userPosition, placePos);
-                        return { ...place, distance };
-                    })
-                    .sort((a, b) => a.distance - b.distance);
+                // 기존 마커 제거
+                if (currentMarker) {
+                    currentMarker.setMap(null);
+                }
+
+                // 새 마커 생성
+                const marker = new window.kakao.maps.Marker({
+                    position: placePosition,
+                    map: map,
+                });
+                setCurrentMarker(marker);
+
+                // 지도 중심 이동
+                setTimeout(() => {
+                    map.setLevel(3);
+                    map.setCenter(placePosition);
+                }, 100);
+            } else if (status === window.kakao.maps.services.Status.ZERO_RESULT) {
+                alert('검색 결과가 존재하지 않습니다.');
+            } else if (status === window.kakao.maps.services.Status.ERROR) {
+                alert('검색 결과 중 오류가 발생했습니다.');
             }
-
-            setPlaces(searchResults);
-        }
-    };
+        });
+    }, [map, ps, currentMarker]);
 
     const removeMarker = () => {
         if (currentMarker) {
@@ -206,35 +251,45 @@ const Kakaomap = () => {
         }
     };
 
-    const handlePlaceClick = place => {
-        removeMarker();
+    const handlePlaceClick = useCallback(
+        place => {
+            if (currentMarker) {
+                currentMarker.setMap(null);
+            }
 
-        const placePosition = new window.kakao.maps.LatLng(place.y, place.x);
+            const placePosition = new window.kakao.maps.LatLng(place.y, place.x);
+            const marker = new window.kakao.maps.Marker({
+                position: placePosition,
+                map: map,
+            });
 
-        const marker = new window.kakao.maps.Marker({
-            position: placePosition,
-            map: map,
-        });
+            setCurrentMarker(marker);
 
-        setCurrentMarker(marker);
+            const content = `<div class="p-2">${place.place_name}</div>`;
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
 
-        const content = `<div class="p-2">${place.place_name}</div>`;
-        infowindow.setContent(content);
-        infowindow.open(map, marker);
-
-        map.setCenter(placePosition);
-        map.setLevel(3);
-    };
+            // 지도 중심 이동 시 레벨 조정 및 약간의 지연 추가
+            setTimeout(() => {
+                map.setLevel(3);
+                map.setCenter(placePosition);
+            }, 100);
+        },
+        [map, currentMarker, infowindow]
+    );
 
     return (
         <div className="container mx-auto p-4">
             <div className="flex flex-col gap-4">
-                <div className="relative w-full h-[400px] rounded-lg overflow-hidden shadow-lg">
+                <SearchForm onSearch={searchPlaces} />
+                <div
+                    className={`w-full rounded-lg overflow-hidden shadow-lg transition-all duration-300 ease-in-out ${
+                        hasSearched ? 'h-[400px]' : 'h-[calc(100vh-160px)]'
+                    }`}
+                >
                     <div id="map" className="w-full h-full"></div>
                 </div>
-                <div className="w-full">
-                    <PlacesList places={places} onPlaceClick={handlePlaceClick} onSearch={searchPlaces} />
-                </div>
+                {hasSearched && places.length > 0 && <PlacesList places={places} onPlaceClick={handlePlaceClick} />}
             </div>
         </div>
     );
