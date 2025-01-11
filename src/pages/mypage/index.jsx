@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import '../../../src/styles/globals.css';
 
-const Mypage = ({ onLogin }) => {
+const Mypage = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
@@ -18,7 +18,6 @@ const Mypage = ({ onLogin }) => {
                     onClick={() => {
                         localStorage.setItem('accessToken', 'dummyToken'); // dummy token
                         setIsLoggedIn(true);
-                        onLogin();
                     }}
                     style={{
                         padding: '10px 20px',
@@ -43,7 +42,6 @@ const Mypage = ({ onLogin }) => {
                 onClick={() => {
                     localStorage.removeItem('accessToken');
                     setIsLoggedIn(false);
-                    onLogin();
                 }}
                 style={{
                     padding: '10px 20px',

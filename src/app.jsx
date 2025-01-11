@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import '../src/styles/globals.css';
 
@@ -15,24 +15,15 @@ import PublicStore from './pages/home/public-store';
 import PrivateStore from './pages/home/private-store';
 
 const App = () => {
-    const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken'));
     const [showSplash, setShowSplash] = useState(true);
 
     useEffect(() => {
-        // Hide splash screen after 1.5 second
         const splashTimeout = setTimeout(() => {
             setShowSplash(false);
         }, 1500);
 
-        // Listen for localStorage changes
-        const handleStorageChange = () => {
-            setAccessToken(localStorage.getItem('accessToken'));
-        };
-        window.addEventListener('storage', handleStorageChange);
-
         return () => {
             clearTimeout(splashTimeout);
-            window.removeEventListener('storage', handleStorageChange);
         };
     }, []);
 
@@ -44,15 +35,12 @@ const App = () => {
         <div className="container-col">
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={accessToken ? <Home /> : <Link to="/mypage" />} />
+                    <Route path="/" element={<Home />} />
                     <Route path="/my-store" element={<MyStore />} />
                     <Route path="/public-store" element={<PublicStore />} />
                     <Route path="/private-store" element={<PrivateStore />} />
-                    <Route path="/payment" element={accessToken ? <Payment /> : <Link to="/mypage" />} />
-                    <Route
-                        path="/mypage"
-                        element={<Mypage onLogin={() => setAccessToken(localStorage.getItem('accessToken'))} />}
-                    />
+                    <Route path="/payment" element={<Payment />} />
+                    <Route path="/mypage" element={<Mypage />} />
                 </Routes>
                 <BottomTab />
             </BrowserRouter>

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Lottie from 'react-lottie-player';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import '../../../src/styles/globals.css';
 import '../../../src/styles/home.css';
@@ -11,6 +11,15 @@ import free from '../../assets/animations/free.json';
 import lock from '../../assets/animations/lock.json';
 
 const Home = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+            navigate('/mypage'); // accessToken이 없으면 MyPage로 리디렉션
+        }
+    }, [navigate]);
+    
     return (
         <div className="home-container">
             {/* Logo */}
