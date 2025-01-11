@@ -1,4 +1,5 @@
 import React from 'react';
+import searchIcon from '../assets/icons/search.svg';
 
 const SearchForm = ({ onSearch }) => {
     return (
@@ -11,7 +12,7 @@ const SearchForm = ({ onSearch }) => {
                 className="flex items-center justify-center"
             >
                 <div className="relative flex items-center w-full max-w-xl">
-                    <img src="src/assets/icons/search.svg" alt="Search Icon" className="absolute left-3 w-5 h-5" />
+                    <img src={searchIcon} alt="Search Icon" className="absolute left-3 w-5 h-5" />
                     <input
                         type="text"
                         placeholder="가게를 검색해보세요"

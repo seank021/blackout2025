@@ -115,14 +115,17 @@ const Kakaomap = () => {
             position: absolute;
             bottom: 30px;
             left: 10px;
-            padding: 8px 16px;
+            width: 33px;
+            height: 33px;
+            padding: 6px;
             background: white;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
             cursor: pointer;
             z-index: 2;
-            font-size: 14px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
         `;
 
         const handleClick = () => getCurrentLocation();
@@ -284,7 +287,7 @@ const Kakaomap = () => {
                 <SearchForm onSearch={searchPlaces} />
                 <div
                     className={`w-full rounded-lg overflow-hidden shadow-lg transition-all duration-300 ease-in-out ${
-                        hasSearched ? 'h-[400px]' : 'h-[calc(100vh-160px)]'
+                        hasSearched ? 'h-[400px]' : 'h-[calc(100vh-250px)]'
                     }`}
                 >
                     <div id="map" className="w-full h-full"></div>
