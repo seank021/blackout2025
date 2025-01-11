@@ -11,6 +11,7 @@ export const signUp = async ({ username, password }) => {
         return response;
     } catch (error) {
         console.error(error);
+        return error.response;
     }
 }
 
@@ -24,6 +25,7 @@ export const logIn = async ({ username, password }) => {
         return response;
     } catch (error) {
         console.error(error);
+        return error.response;
     }
 }
 
@@ -39,6 +41,7 @@ export const getMyStore = async () => {
         return response;
     } catch (error) {
         console.error(error);
+        return error.response;
     }
 }
 
