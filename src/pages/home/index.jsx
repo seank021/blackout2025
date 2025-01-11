@@ -1,16 +1,12 @@
+import Lottie from 'lottie-react';
+import { Link } from 'react-router-dom';
 import '../../../src/styles/globals.css';
 import '../../../src/styles/home.css';
 import logo from '../../assets/icons/logo-home.svg';
 import arrow from '../../assets/icons/right-arrow.svg';
-import folderIcon from '../../assets/images/folder.svg';
-import publicStoreIcon from '../../assets/images/map.svg';
-import privateStoreIcon from '../../assets/images/lock.svg';
-
-/* pages */
-import MyStore from './my-store';
-import PublicStore from './public-store';
-import PrivateStore from './private-store';
-import { Link } from 'react-router-dom';
+import folder from '../../assets/animations/folder.json';
+import free from '../../assets/animations/free.json';
+import lock from '../../assets/animations/lock.json';
 
 const Home = () => {
     return (
@@ -34,7 +30,7 @@ const Home = () => {
                             이미 내가 등록한 매장으로,{'\n'}자유롭게 사용이 가능해요!
                         </p>
                     </div>
-                    <img src={folderIcon} alt="My Store" className="w-[90px] h-[80px]" />
+                    <Lottie animationData={folder} style={{ width: '100px', height: '100px' }} />
                 </Link>
 
                 {/* Small Cards */}
@@ -49,7 +45,7 @@ const Home = () => {
                                 <p className="card-text-small">
                                     비밀번호 없이{'\n'}모두가 자유롭게{'\n'}이용 가능해요!{'\n'}
                                 </p>
-                                <img src={publicStoreIcon} alt="Public Store" className="w-[30px] h-[46px]" />
+                                <Lottie animationData={free} style={{ width: '40px', height: '40px' }} />
                             </div>
                         </div>
                     </Link>
@@ -63,7 +59,7 @@ const Home = () => {
                                 <p className="card-text-small">
                                     비밀번호를 입력해야{'\n'}이용 가능해요!{'\n'}
                                 </p>
-                                <img src={privateStoreIcon} alt="Private Store" className="w-[30px] h-[41px]" />
+                                <Lottie animationData={lock} style={{ width: '45px', height: '45px' }} />
                             </div>
                         </div>
                     </Link>
