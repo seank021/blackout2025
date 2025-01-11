@@ -1,45 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchForm from './SearchForm';
 import StoreItem from './storeItem';
 import { useNavigate } from 'react-router-dom';
 import backBtn from '../assets/icons/backBtn.svg';
+import { getMyStore } from '../apis/api';
 
-const dummyMyStore = [
-    {
-        name: '오삼숙이',
-        address: '서울 관악구 대학길 57',
-        remainingAmount: '2,357,000',
-    },
-    {
-        name: '지오구 조타',
-        address: '서울 관악구 대학길 57',
-        remainingAmount: '27,000',
-    },
-    {
-        name: '아리가또',
-        address: '서울 관악구 대학길 57',
-        remainingAmount: '2,000',
-    },
-];
-
-const dummyPublicStore = [
-    {
-        name: '퍼블릭',
-        address: '서울 관악구 대학길 57',
-        remainingAmount: '2,357,000',
-    },
-];
-
-const dummyPrivateStore = [
-    {
-        name: '프라이빗',
-        address: '서울 관악구 대학길 57',
-        remainingAmount: '2,357,000',
-    },
-];
+const titleMap = {
+    "마이": "me",
+    "퍼블릭": "public",
+    "프라이빗": "private"
+}
 
 function Store({ title }) {
     const navigate = useNavigate();
+    const [store, setStore] = useState(null);
+    const [totalAmount, setTotalAmount] = useState(0);
+
+    useEffect(() => {
+        const fetchStore = async () => {
+            const response = await getMyStore({ title: titleMap[title] });
+            setStore(response.data);
+        };
+        fetchStore();
+    }, [title]);    
+
+    useEffect(() => {
+        if (store) {
+            let total = 0;
+            store.forEach((item) => {
+                item.my_prepay.forEach((prepay) => {
+                    total += prepay.credit;
+                });
+            });
+            setTotalAmount(total);
+        }
+    }, [store]);
 
     return (
         <div className="w-full h-full">
@@ -50,13 +45,15 @@ function Store({ title }) {
 
             <SearchForm onSearch={() => {}} />
 
-            <div className="mt-[10px] flex flex-col items-center justify-center gap-[0px]">
-                {title === '프라이빗'
-                    ? dummyPrivateStore.map((store, index) => <StoreItem key={index} store={store} />)
-                    : title === '퍼블릭'
-                      ? dummyPublicStore.map((store, index) => <StoreItem key={index} store={store} />)
-                      : dummyMyStore.map((store, index) => <StoreItem key={index} store={store} />)}
-            </div>
+            {store && (
+                <div className="flex flex-col gap-[20px] mt-[20px] justify-center items-center">
+                    {store.map((item) => (
+                        <StoreItem key={item.id} store={item} totalAmount={totalAmount} />
+                    ))}
+                </div>
+            )}
+
+            
         </div>
     );
 }
