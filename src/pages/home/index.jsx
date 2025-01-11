@@ -1,4 +1,4 @@
-import '../../../src/globals.css'
+import '../../../src/globals.css';
 
 const Home = () => {
     return (
@@ -7,6 +7,6 @@ const Home = () => {
             <p>This is home</p>
         </div>
     );
-}
+};
 
 export default Home;

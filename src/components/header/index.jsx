@@ -6,9 +6,11 @@ const Header = () => {
         <header className="header">
             <h1>Header</h1>
             <p>This is header</p>
-            <Link to="/" className='underline'>Home</Link>
+            <Link to="/" className="underline">
+                Home
+            </Link>
         </header>
     );
-}
+};
 
 export default Header;
