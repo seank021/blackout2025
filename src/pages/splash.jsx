@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../src/styles/globals.css';
+import video from '../../src/assets/videos/splash.mp4';
 
 const Splash = () => {
     return (
@@ -24,7 +25,7 @@ const Splash = () => {
                     objectFit: 'cover',
                 }}
             >
-                <source src="/src/assets/videos/splash.mp4" type="video/mp4" />
+                <source src={video} type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
         </div>
