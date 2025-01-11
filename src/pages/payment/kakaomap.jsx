@@ -288,7 +288,7 @@ const Kakaomap = () => {
     );
 
     return (
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto">
             <div className="flex flex-col gap-4">
                 <SearchForm onSearch={searchPlaces} />
                 <div
