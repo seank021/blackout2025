@@ -1,4 +1,7 @@
+import { useNavigate } from 'react-router-dom';
+
 const PlaceItem = ({ place, index, onClick }) => {
+    const navigate = useNavigate();
     return (
         <li
             className="w-full h-[111px] relative border-b border-[#cccccc] overflow-hidden cursor-pointer hover:bg-gray-50"
@@ -27,7 +30,10 @@ const PlaceItem = ({ place, index, onClick }) => {
             </div>
             <div className="absolute right-[24px] bottom-[23px]">
                 <button className="w-[89px] h-[31px] px-5 py-[3px] bg-[#0763c2] rounded-[40px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]">
-                    <span className="text-white text-[11px] font-medium leading-7 relative bottom-[2px]">
+                    <span
+                        className="text-white text-[11px] font-medium leading-7 relative bottom-[2px]"
+                        onClick={() => navigate('/payment/private-key-input', { state: { place: place } })}
+                    >
                         선결제하기
                     </span>
                 </button>
