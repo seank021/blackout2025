@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import '../../../src/styles/globals.css';
+import Login from './login';
+import My from './my';
 
 const Mypage = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -11,50 +13,12 @@ const Mypage = () => {
 
     if (!isLoggedIn) {
         return (
-            <div className="container-col p-4">
-                <h1>Login / Sign Up</h1>
-                <p>Please log in or sign up to access your profile.</p>
-                <button
-                    onClick={() => {
-                        localStorage.setItem('accessToken', 'dummyToken'); // dummy token
-                        setIsLoggedIn(true);
-                    }}
-                    style={{
-                        padding: '10px 20px',
-                        backgroundColor: '#007BFF',
-                        color: '#fff',
-                        border: 'none',
-                        borderRadius: '5px',
-                        cursor: 'pointer',
-                    }}
-                >
-                    Log In
-                </button>
-            </div>
+            <Login setIsLoggedIn={setIsLoggedIn} />
         );
     }
 
     return (
-        <div className="container-col p-4">
-            <h1>My Page</h1>
-            <p>Welcome to your profile!</p>
-            <button
-                onClick={() => {
-                    localStorage.removeItem('accessToken');
-                    setIsLoggedIn(false);
-                }}
-                style={{
-                    padding: '10px 20px',
-                    backgroundColor: '#FF4D4D',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                }}
-            >
-                Log Out
-            </button>
-        </div>
+        <My setIsLoggedIn={setIsLoggedIn} />
     );
 };
 
