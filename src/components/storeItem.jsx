@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import dropdown from '../assets/icons/dropdown.png';
 import '../styles/store.css';
 import PasswordModal from './modal';
@@ -9,6 +10,8 @@ function StoreItem({ store, totalAmount, title }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedPrepayId, setSelectedPrepayId] = useState(null);
 
+    const navigate = useNavigate();
+
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
     };
@@ -16,6 +19,10 @@ function StoreItem({ store, totalAmount, title }) {
     const onClickPrepay = (e, id) => {
         e.preventDefault();
         setSelectedPrepayId(id); // 선택한 id 저장
+        if (title === '퍼블릭') {
+            navigate(`/qr`, { state: 'public' });
+            return;
+        }
         setIsModalOpen(true); // 모달 열기
     }
 
@@ -23,6 +30,11 @@ function StoreItem({ store, totalAmount, title }) {
         console.log('Selected prepay id:', id);
         console.log('Entered password:', password);
         const response = await checkPassword({ id, password });
+        if (response.status === 200) {
+            if (response.data.is_valid) {
+                navigate(`/qr`, { state: 'private' });
+            }
+        }
     };
 
     return (
