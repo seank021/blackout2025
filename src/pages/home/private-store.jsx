@@ -1,7 +1,9 @@
+import Store from '../../components/store';
+
 const PrivateStore = () => {
     return (
         <div>
-            <h1>Private Store</h1>
+            <Store title="프라이빗" />
         </div>
     );
 };

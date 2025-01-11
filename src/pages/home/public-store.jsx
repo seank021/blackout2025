@@ -1,7 +1,9 @@
+import Store from '../../components/store';
+
 const PublicStore = () => {
     return (
         <div>
-            <h1>Public Store</h1>
+            <Store title="퍼블릭" />
         </div>
     );
 };
