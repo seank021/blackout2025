@@ -4,6 +4,7 @@ import '../../styles/login.css';
 import logo from '../../assets/icons/logo-home.svg';
 import TextInput from '../../components/textinput';
 import Button from '../../components/button';
+import { signUp } from '../../apis/api';
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -11,13 +12,26 @@ const Signup = () => {
     const [password, setPassword] = useState('');
     const [passwordConfirm, setPasswordConfirm] = useState('');
     const [walletAddress, setWalletAddress] = useState('');
-    const [privateKey, setPrivateKey] = useState('');
 
-    const handleSignup = () => {
-        console.log('Signing up with:', username, password, passwordConfirm, walletAddress, privateKey);
-        // api 연결
-        localStorage.setItem('accessToken', '1234567890'); // dummy
-        navigate('/mypage');
+    const handleSignup = async () => {
+        if (!username || !password || !passwordConfirm || !walletAddress) {
+            alert('모든 항목을 입력해주세요.');
+            return;
+        }
+        if (password !== passwordConfirm) {
+            alert('비밀번호가 일치하지 않습니다.');
+            return;
+        }
+
+        const response = await signUp({ username, password });
+        console.log(response);
+        if (response.status === 201) {
+            localStorage.setItem('walletAddress', walletAddress);
+            localStorage.setItem('accessToken', response.data.user.token);
+            navigate('/mypage');
+        } else {
+            alert('회원가입에 실패했습니다.');
+        }
     };
 
     return (
@@ -46,14 +60,12 @@ const Signup = () => {
                 value={walletAddress}
                 onChange={e => setWalletAddress(e.target.value)}
             />
-            <TextInput
-                placeholder="이더리움 지갑 개인키를 입력하세요"
-                value={privateKey}
-                onChange={e => setPrivateKey(e.target.value)}
-            />
             <Button label="회원가입" onClick={handleSignup} />
             <Link to="/mypage">
                 <p className="underline signup-link">로그인하기</p>
+            </Link>
+            <Link to="https://support.metamask.io/ko/start/getting-started-with-metamask">
+                <p className="underline link">이더리움 지갑을 생성하려면?</p>
             </Link>
         </div>
     );
