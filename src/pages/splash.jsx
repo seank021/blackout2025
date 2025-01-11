@@ -1,5 +1,5 @@
+import React from 'react';
 import '../../src/styles/globals.css';
-import logo from '../assets/icons/logo.svg';
 
 const Splash = () => {
     return (
@@ -9,10 +9,24 @@ const Splash = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 height: '100vh',
-                backgroundColor: '#0D233A',
+
+                overflow: 'hidden',
             }}
         >
-            <img src={logo} alt="Logo" style={{ height: '100px' }} />
+            <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                style={{
+                    // width: '100%',
+                    // height: '100%',
+                    objectFit: 'cover',
+                }}
+            >
+                <source src="/src/assets/videos/splash.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
         </div>
     );
 };

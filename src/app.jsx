@@ -22,7 +22,7 @@ const App = () => {
         // Hide splash screen after 0.7 second
         const splashTimeout = setTimeout(() => {
             setShowSplash(false);
-        }, 700);
+        }, 1500);
 
         // Listen for localStorage changes
         const handleStorageChange = () => {
