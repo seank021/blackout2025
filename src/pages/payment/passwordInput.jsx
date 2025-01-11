@@ -37,6 +37,11 @@ function PasswordInput() {
 
             const contract = new web3.eth.Contract(contractABI, contractAddress);
 
+            const storeAddress =
+                recordType === 'private'
+                    ? '0x4c9b625E989587aDFB1104a28D60D0E1c1F15caE'
+                    : '0x860E57F925F51de2b7B365c523758CD8eA8CCE35';
+
             const data = contract.methods
                 .addCredit(
                     storeName,
@@ -44,13 +49,13 @@ function PasswordInput() {
                     recordType,
                     inputPassword,
                     creditAmount,
-                    '0x4c9b625E989587aDFB1104a28D60D0E1c1F15caE' // 가게 지갑 주소
+                    storeAddress // 가게 지갑 주소
                 )
                 .encodeABI();
 
             const tx = {
                 from: walletAddress, // 사용자 지갑 주소
-                to: '0x4c9b625E989587aDFB1104a28D60D0E1c1F15caE', // 가게 지갑 주소
+                to: storeAddress, // 가게 지갑 주소
                 gas: 210000,
                 maxPriorityFeePerGas: web3.utils.toWei('2', 'gwei'),
                 maxFeePerGas: web3.utils.toWei('50', 'gwei'),
