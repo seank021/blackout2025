@@ -2,8 +2,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 /* icons */
 import payment from '../assets/icons/payment.svg';
+import paymentColor from '../assets/icons/payment-color.svg';
 import home from '../assets/icons/home.svg';
+import homeColor from '../assets/icons/home-color.svg';
 import mypage from '../assets/icons/mypage.svg';
+import mypageColor from '../assets/icons/mypage-color.svg';
 
 const BottomTab = () => {
     const location = useLocation();
@@ -32,7 +35,7 @@ const BottomTab = () => {
                     cursor: 'pointer',
                 }}
             >
-                <img src={payment} alt="Payment" style={{ height: '26px' }} />
+                <img src={location.pathname === '/payment' ? paymentColor : payment} alt="Payment" style={{ width: '24px', height: '24px' }} />
                 <div className="text-sm">선결제</div>
             </div>
             <div
@@ -52,7 +55,7 @@ const BottomTab = () => {
                     cursor: 'pointer',
                 }}
             >
-                <img src={home} alt="Home" style={{ height: '24px' }} />
+                <img src={location.pathname === '/' ? homeColor : home} alt="Home" style={{ width: '24px', height: '24px' }} />
                 <div className="text-sm">홈</div>
             </div>
             <div
@@ -66,7 +69,7 @@ const BottomTab = () => {
                     cursor: 'pointer',
                 }}
             >
-                <img src={mypage} alt="Mypage" style={{ height: '24px' }} />
+                <img src={location.pathname === '/mypage' ? mypageColor : mypage} alt="Mypage" style={{ width: '24px', height: '24px' }} />
                 <div className="text-sm">My</div>
             </div>
         </div>
