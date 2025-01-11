@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import Lottie from 'react-lottie-player';
 import { Link } from 'react-router-dom';
 

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import '../src/styles/globals.css';
 
@@ -19,7 +19,7 @@ const App = () => {
     const [showSplash, setShowSplash] = useState(true);
 
     useEffect(() => {
-        // Hide splash screen after 0.7 second
+        // Hide splash screen after 1.5 second
         const splashTimeout = setTimeout(() => {
             setShowSplash(false);
         }, 1500);
@@ -44,11 +44,11 @@ const App = () => {
         <div className="container-col">
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={accessToken ? <Home /> : <Navigate to="/mypage" />} />
+                    <Route path="/" element={accessToken ? <Home /> : <Link to="/mypage" />} />
                     <Route path="/my-store" element={<MyStore />} />
                     <Route path="/public-store" element={<PublicStore />} />
                     <Route path="/private-store" element={<PrivateStore />} />
-                    <Route path="/payment" element={accessToken ? <Payment /> : <Navigate to="/mypage" />} />
+                    <Route path="/payment" element={accessToken ? <Payment /> : <Link to="/mypage" />} />
                     <Route
                         path="/mypage"
                         element={<Mypage onLogin={() => setAccessToken(localStorage.getItem('accessToken'))} />}
