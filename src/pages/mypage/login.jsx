@@ -11,7 +11,8 @@ const Login = ({ setIsLoggedIn }) => {
 
     const handleLogin = () => {
         console.log('Logging in with:', username, password);
-        console.log(username, password);
+        // api 연결
+        localStorage.setItem('accessToken', '1234567890'); // dummy
         setIsLoggedIn(true);
     };
 

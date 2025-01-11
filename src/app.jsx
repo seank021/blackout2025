@@ -9,6 +9,7 @@ import BottomTab from './components/bottom-tab';
 import Home from './pages/home';
 import Payment from './pages/payment';
 import Mypage from './pages/mypage';
+import Signup from './pages/mypage/signup';
 import Splash from './pages/splash';
 import MyStore from './pages/home/my-store';
 import PublicStore from './pages/home/public-store';
@@ -41,6 +42,7 @@ const App = () => {
                     <Route path="/private-store" element={<PrivateStore />} />
                     <Route path="/payment" element={<Payment />} />
                     <Route path="/mypage" element={<Mypage />} />
+                    <Route path="signup" element={<Signup />} />
                 </Routes>
                 <BottomTab />
             </BrowserRouter>
