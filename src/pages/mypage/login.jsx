@@ -24,26 +24,19 @@ const Login = ({ setIsLoggedIn }) => {
             </div>
             <p className="sub-text">신뢰로 이어지는 따뜻한 연결</p>
 
-            <TextInput
-                placeholder="아이디를 입력하세요"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
+            <TextInput placeholder="아이디를 입력하세요" value={username} onChange={e => setUsername(e.target.value)} />
             <TextInput
                 type="password"
                 placeholder="비밀번호를 입력하세요"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={e => setPassword(e.target.value)}
             />
-            <Button
-                label="로그인"
-                onClick={handleLogin}
-            />
+            <Button label="로그인" onClick={handleLogin} />
             <Link to="/signup">
                 <p className="underline signup-link">회원이 아니신가요?</p>
             </Link>
         </div>
     );
-}
+};
 
 export default Login;
