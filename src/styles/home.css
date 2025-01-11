@@ -16,14 +16,15 @@
 }
 
 .logo {
-    width: 227px;
+    width: 300px;
 }
 
 /* Subtitle */
 .sub-text {
     text-align: center;
-    font-size: 13.6px;
+    font-size: 15px;
     color: #6b7280;
+    margin-top: -5px;
     margin-bottom: 50px;
 }
 
