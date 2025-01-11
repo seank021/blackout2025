@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import backBtn from '../../assets/icons/backBtn.svg';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
@@ -7,6 +7,8 @@ function PaymentsCountInput() {
 
     const inputRef = useRef(null);
 
+    const [credit, setCredit] = useState(null);
+
     useEffect(() => {
         if (inputRef.current) {
             inputRef.current.focus();
@@ -14,15 +16,16 @@ function PaymentsCountInput() {
         }
     }, []);
 
-    const { place } = useLocation().state;
+    const { place, privateKey } = useLocation().state;
 
     const onClickNext = () => {
         if (inputRef.current.value === '') {
             alert('얼마를 선결제할까요?');
             return;
         }
-        navigate('/payment/select-store-type', { state: { place: place } });
-    }
+
+        navigate('/payment/select-store-type', { state: { place: place, credit: credit, privateKey: privateKey } });
+    };
 
     return (
         <div className="container-col">
@@ -41,13 +44,16 @@ function PaymentsCountInput() {
                                 <span className="text-black text-lg font-normal font-['Inter'] leading-7">에</span>
                             </div>
                         </div>
-                        <div className='flex items-center justify-center'>
+                        <div className="flex items-center justify-center">
                             <input
+                                onChange={e => setCredit(e.target.value)}
                                 className="w-[80vw] rounded-[12px] border-gray-400 self-stretch text-[24px] font-bold font-['Inter'] leading-7 py-[10px]"
                                 placeholder="얼마를 선결제할까요?"
                                 ref={inputRef}
                             />
-                            <div className="text-black text-[24px] font-normal font-['Inter'] font-bold leading-7">원</div>
+                            <div className="text-black text-[24px] font-normal font-['Inter'] font-bold leading-7">
+                                원
+                            </div>
                         </div>
                     </div>
                 </div>

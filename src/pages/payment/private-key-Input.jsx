@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import backBtn from '../../assets/icons/backBtn.svg';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 function PrivateKeyInput() {
     const { place } = useLocation().state;
     const navigate = useNavigate();
+
+    const [privateKey, setPrivateKey] = useState('');
+
     return (
         <div className="container-col ">
             <img className="absolute top-[20px] left-[20px]" src={backBtn} alt="logo" onClick={() => navigate(-1)} />
@@ -27,7 +30,10 @@ function PrivateKeyInput() {
                                 </span>
                             </div>
                         </div>
-                        <input className="w-[80vw] rounded-[12px] border-2 border-gray-400 self-stretch text-gray-400 text-[15px] font-bold font-['Inter'] leading-7 px-[10px] py-[5px]" />
+                        <input
+                            onChange={e => setPrivateKey(e.target.value)}
+                            className="w-[80vw] rounded-[12px] border-2 border-gray-400 self-stretch text-gray-400 text-[15px] font-bold font-['Inter'] leading-7 px-[10px] py-[5px]"
+                        />
                     </div>
                     <div className="flex flex-col items-center justify-center gap-[3px]  ">
                         <Link
@@ -43,7 +49,11 @@ function PrivateKeyInput() {
                 </div>
                 <div className="w-[80vw] h-10 relative mt-[10px]">
                     <div
-                        onClick={() => navigate('/payment/payments-count-input', { state: { place: place } })}
+                        onClick={() =>
+                            navigate('/payment/payments-count-input', {
+                                state: { place: place, privateKey: privateKey },
+                            })
+                        }
                         className="w-[100%] h-10 left-0 top-0 absolute bg-[#c4dcf7] rounded-[10px] flex items-center justify-center text-black text-center font-['Inter'] text-[12px] font-bold"
                     >
                         다음
