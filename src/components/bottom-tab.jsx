@@ -60,7 +60,12 @@ const BottomTab = () => {
                 }}
             >
                 <img
-                    src={location.pathname === '/' ? homeColor : home}
+                    src={location.pathname === '/' ||
+                        location.pathname === '/my-store' ||
+                        location.pathname === '/public-store' ||
+                        location.pathname === '/private-store'
+                        ? homeColor
+                        : home}
                     alt="Home"
                     style={{ width: '24px', height: '24px' }}
                 />
@@ -70,7 +75,10 @@ const BottomTab = () => {
                 onClick={() => handleNavigation('/mypage')}
                 style={{
                     textDecoration: 'none',
-                    color: location.pathname === '/mypage' ? '#007BFF' : '#000',
+                    color: location.pathname === '/mypage' ||
+                        location.pathname === '/signup'
+                        ? '#007BFF'
+                        : '#000',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -78,7 +86,10 @@ const BottomTab = () => {
                 }}
             >
                 <img
-                    src={location.pathname === '/mypage' ? mypageColor : mypage}
+                    src={location.pathname === '/mypage' ||
+                        location.pathname === '/signup'
+                        ? mypageColor
+                        : mypage}
                     alt="Mypage"
                     style={{ width: '24px', height: '24px' }}
                 />
