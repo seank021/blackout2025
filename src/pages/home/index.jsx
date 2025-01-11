@@ -1,5 +1,7 @@
-import Lottie from 'lottie-react';
+import React, { useState, useRef } from 'react';
+import Lottie from 'react-lottie-player';
 import { Link } from 'react-router-dom';
+
 import '../../../src/styles/globals.css';
 import '../../../src/styles/home.css';
 import logo from '../../assets/icons/logo-home.svg';
@@ -30,7 +32,12 @@ const Home = () => {
                             이미 내가 등록한 매장으로,{'\n'}자유롭게 사용이 가능해요!
                         </p>
                     </div>
-                    <Lottie animationData={folder} style={{ width: '100px', height: '100px' }} />
+                    <Lottie
+                        animationData={folder}
+                        play
+                        loop={false}
+                        style={{ width: '100px', height: '100px' }}
+                    />
                 </Link>
 
                 {/* Small Cards */}
@@ -45,7 +52,12 @@ const Home = () => {
                                 <p className="card-text-small">
                                     비밀번호 없이{'\n'}모두가 자유롭게{'\n'}이용 가능해요!{'\n'}
                                 </p>
-                                <Lottie animationData={free} style={{ width: '40px', height: '40px' }} />
+                                <Lottie
+                                    animationData={free}
+                                    play
+                                    loop={false}
+                                    style={{ width: '40px', height: '40px' }}
+                                />
                             </div>
                         </div>
                     </Link>
@@ -59,7 +71,12 @@ const Home = () => {
                                 <p className="card-text-small">
                                     비밀번호를 입력해야{'\n'}이용 가능해요!{'\n'}
                                 </p>
-                                <Lottie animationData={lock} style={{ width: '45px', height: '45px' }} />
+                                <Lottie
+                                    animationData={lock}
+                                    play
+                                    loop={false}
+                                    style={{ width: '45px', height: '45px' }}
+                                />
                             </div>
                         </div>
                     </Link>
