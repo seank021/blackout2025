@@ -1,4 +1,4 @@
-import '../../../src/globals.css';
+import '../../../src/styles/globals.css';
 
 const About = () => {
     return (
