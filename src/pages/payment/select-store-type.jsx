@@ -35,7 +35,7 @@ function PrivateKeyInput() {
                         </div>
                         <input
                             ref={inputRef}
-                            className="w-[80vw] rounded-[12px]  border-gray-400 self-stretch text-gray-400 text-[24px] font-bold font-['Inter'] leading-7 px-[10px] py-[5px]"
+                            className="w-[80vw] rounded-[12px] border-gray-400 self-stretch text-[24px] font-bold font-['Inter'] leading-7 py-[5px]"
                             placeholder="비밀번호를 입력해주세요"
                         />
                     </div>

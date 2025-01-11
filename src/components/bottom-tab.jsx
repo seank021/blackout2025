@@ -28,7 +28,13 @@ const BottomTab = () => {
                 onClick={() => handleNavigation('/payment')}
                 style={{
                     textDecoration: 'none',
-                    color: location.pathname === '/payment' ? '#007BFF' : '#000',
+                    color:
+                        location.pathname === '/payment' ||
+                        location.pathname === '/payment/private-key-input' ||
+                        location.pathname === '/payment/payments-count-input' ||
+                        location.pathname === '/payment/password-input' ||
+                        location.pathname === '/payment/select-store-type'
+                            ? '#007BFF' : '#000',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -36,7 +42,13 @@ const BottomTab = () => {
                 }}
             >
                 <img
-                    src={location.pathname === '/payment' ? paymentColor : payment}
+                    src={location.pathname === '/payment' ||
+                        location.pathname === '/payment/private-key-input' ||
+                        location.pathname === '/payment/payments-count-input' ||
+                        location.pathname === '/payment/password-input' ||
+                        location.pathname === '/payment/select-store-type'
+                            ? paymentColor
+                            : payment}
                     alt="Payment"
                     style={{ width: '24px', height: '24px' }}
                 />
