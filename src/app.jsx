@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import '../src/globals.css';
+import '../src/styles/globals.css';
 
 /* components */
 import BottomTab from './components/bottom-tab';

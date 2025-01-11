@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import '../../../src/globals.css';
+import '../../../src/styles/globals.css';
 
 const Mypage = ({ onLogin }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
