@@ -1,4 +1,4 @@
-import '../../src/globals.css';
+import '../../src/styles/globals.css';
 import logo from '../assets/icons/logo.svg';
 
 const Splash = () => {
