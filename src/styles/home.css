@@ -48,8 +48,8 @@
     justify-content: space-between;
     padding: 16px 24px;
     border-radius: 16px;
-    background-color: #eef5ff;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(180deg, rgba(143, 194, 250, 0.15) 0%, rgba(147, 195, 249, 0.5) 100%);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 /* Small Card Container */
@@ -69,8 +69,8 @@
     justify-content: space-between;
     padding: 16px 12px;
     border-radius: 16px;
-    background-color: #eef5ff;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(180deg, rgba(143, 194, 250, 0.15) 0%, rgba(147, 195, 249, 0.5) 100%);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 /* Card Title */
