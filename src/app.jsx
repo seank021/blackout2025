@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes, Link, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link, useLocation, Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import '../src/globals.css';
 
 {/* pages */}
@@ -14,14 +15,35 @@ import home from "./assets/icons/home.png";
 import mypage from "./assets/icons/mypage.png";
 
 const App = () => {
+  const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken"));
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setAccessToken(localStorage.getItem("accessToken"));
+    };
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+  
   return (
     <div className="container-col">
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/mypage" element={<Mypage />} />
+          <Route 
+            path="/"
+            element={accessToken ? <Home /> : <Navigate to="/mypage" />}
+          />
+          <Route
+            path="/payment"
+            element={accessToken ? <Payment /> : <Navigate to="/mypage" />}
+          />
+          <Route
+            path="/mypage"
+            element={<Mypage onLogin={() => setAccessToken(localStorage.getItem("accessToken"))} />}
+          />
         </Routes>
         <Footer />
         <BottomTab />
