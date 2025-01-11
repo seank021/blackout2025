@@ -50,7 +50,7 @@ const App = () => {
                     <Route path="/payment/select-store-type" element={<SelectStoreType />} />
                     <Route path="/payment/password-input" element={<PasswordInput />} />
                     <Route path="/mypage" element={<Mypage />} />
-                    <Route path="signup" element={<Signup />} />
+                    <Route path="/signup" element={<Signup />} />
                 </Routes>
                 <BottomTab />
             </BrowserRouter>

@@ -30,18 +30,20 @@ export const logIn = async ({ username, password }) => {
 }
 
 // get my store
-export const getMyStore = async () => {
-    const accessToken = localStorage.getItem("access_token");
+export const getMyStore = async ({ title }) => {
+    const accessToken = localStorage.getItem("accessToken");
+    console.log(accessToken);
+
     try {
-        const response = await axios.get(`${API_URL}/stores/me/`, {
+        const response = await axios.get(`${API_URL}/stores/${title}/`, {
             headers: {
-                Authorization: `Bearer ${accessToken}`,
+                Authorization: `Token ${accessToken}`,
             },
         });
+        console.log(response);
         return response;
     } catch (error) {
         console.error(error);
         return error.response;
     }
 }
-

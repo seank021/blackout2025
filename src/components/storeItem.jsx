@@ -1,35 +1,67 @@
-import React from 'react';
+import React, { useState } from 'react';
+import dropdown from '../assets/icons/dropdown.png';
+import '../styles/store.css';
 
-function StoreItem({ store }) {
+function StoreItem({ store, totalAmount }) {
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen(!isDropdownOpen);
+    };
+
     return (
-        <div className="w-[350px] h-[110px] p-2.5 flex-col justify-center items-center gap-2.5 inline-flex">
-            <div className="self-stretch h-[90px] px-[15px] bg-[#8FC2FA0D] rounded-[7px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] flex-col justify-center items-center flex overflow-hidden">
-                <div className="self-stretch flex-col justify-center items-start flex">
-                    <div className="pl-[3px] justify-start items-center inline-flex overflow-hidden">
-                        <div className="self-stretch flex-col justify-start items-start inline-flex">
-                            <div className="self-stretch justify-start items-center gap-[5px] inline-flex">
-                                <div className="text-black text-[15px] font-bold font-['Inter']">
-                                    {store.name}
-                                </div>
-                            </div>
-                            <div className="self-stretch flex-col justify-start items-start flex">
-                                <div className="self-stretch text-[#666666] text-[10px] font-normal font-['Inter']">
-                                    {store.address}
-                                </div>
-                            </div>
+        <div className="w-[90%] flex-col justify-center items-center flex cursor-pointer">
+            {/* 카드 영역 */}
+            <div
+                onClick={toggleDropdown}
+                className="large-card w-full h-[100px] p-2.5 flex-col justify-center items-center rounded-[7px] flex cursor-pointer transition-all duration-300"
+            >
+                <div className="w-full flex-col justify-center items-start">
+                    <div className="w-full flex justify-between items-center">
+                        <div>
+                            <div className="text-black text-[15px] font-bold">{store.name}</div>
+                            <div className="text-[#666666] text-[10px]">{store.address}</div>
                         </div>
+                        <img
+                            src={dropdown}
+                            alt="dropdown"
+                            className={`w-[15px] h-[15px] transition-transform duration-300 ${
+                                isDropdownOpen ? 'rotate-180' : 'rotate-0'
+                            }`}
+                        />
                     </div>
-                    <div className="w-full pr-0.5 justify-end items-center inline-flex">
-                        <div className="self-stretch justify-center items-end gap-[7px] inline-flex">
-                            <div className="text-black text-[10px] font-normal font-['Inter'] leading-7">
-                                남은 선결제 금액
-                            </div>
-                            <div className="text-[#0763c2] text-[17px] font-semibold font-['Inter'] leading-7">
-                                {store.remainingAmount}원
-                            </div>
-                        </div>
+                    <div className="flex justify-end items-center mt-2">
+                        <div className="text-black text-[10px]">남은 선결제 금액</div>
+                        <div className="text-[#0763c2] text-[17px] font-semibold ml-2">{totalAmount}원</div>
                     </div>
                 </div>
+            </div>
+
+            {/* 드롭다운 영역 */}
+            <div
+                className={`w-full bg-[#8FC2FA0D]/5 overflow-hidden transition-all duration-500 rounded-lg shadow-lg ${
+                    isDropdownOpen ? 'max-h-[200px] p-4' : 'max-h-0 p-0'
+                }`}
+            >
+                {isDropdownOpen &&
+                    (store.my_prepay.length > 0 ? (
+                        <ul>
+                            {store.my_prepay.map((prepay) => (
+                                <li
+                                    key={prepay.id}
+                                    className="flex justify-between items-center border-b border-gray-200 py-2"
+                                >   
+                                    <div className='flex flex-row items-center gap-1'>
+                                        <span className="text-sm text-gray-700">paid by</span>
+                                        <span className="text-sm text-gray-800 font-bold">{prepay.username}</span>
+                                    </div>
+                                    <span className="text-sm text-blue-500">{prepay.credit}원</span>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <div className="text-gray-500 text-center">선결제 정보가 없습니다.</div>
+                    ))}
             </div>
         </div>
     );
