@@ -4,16 +4,21 @@ import '../../styles/login.css';
 import logo from '../../assets/icons/logo-home.svg';
 import TextInput from '../../components/textinput';
 import Button from '../../components/button';
+import { logIn } from '../../apis/api';
 
 const Login = ({ setIsLoggedIn }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleLogin = () => {
-        console.log('Logging in with:', username, password);
-        // api 연결
-        localStorage.setItem('accessToken', '1234567890'); // dummy
-        setIsLoggedIn(true);
+    const handleLogin = async () => {
+        const response = await logIn({ username, password });
+        console.log(response);
+        if (response.status === 200) {
+            localStorage.setItem('accessToken', response.data.token);
+            setIsLoggedIn(true);
+        } else {
+            alert('아이디 또는 비밀번호를 다시 확인해주세요.');
+        }
     };
 
     return (

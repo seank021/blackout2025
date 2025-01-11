@@ -14,4 +14,15 @@ export const signUp = async ({ username, password }) => {
     }
 }
 
-
+// log in
+export const logIn = async ({ username, password }) => {
+    try {
+        const response = await axios.post(`${API_URL}/users/signin/`, {
+            username,
+            password,
+        });
+        return response;
+    } catch (error) {
+        console.error(error);
+    }
+}
