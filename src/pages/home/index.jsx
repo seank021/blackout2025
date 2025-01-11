@@ -36,7 +36,8 @@ const Home = () => {
                         animationData={folder}
                         play
                         loop={false}
-                        style={{ width: '100px', height: '100px' }}
+                        speed={0.8}
+                        style={{ width: '110px', height: '110px' }}
                     />
                 </Link>
 
@@ -56,6 +57,7 @@ const Home = () => {
                                     animationData={free}
                                     play
                                     loop={false}
+                                    speed={0.8}
                                     style={{ width: '40px', height: '40px' }}
                                 />
                             </div>
@@ -75,6 +77,7 @@ const Home = () => {
                                     animationData={lock}
                                     play
                                     loop={false}
+                                    speed={0.8}
                                     style={{ width: '45px', height: '45px' }}
                                 />
                             </div>
