@@ -1,22 +1,16 @@
-import { BrowserRouter, Route, Routes, Link, useLocation, Navigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import '../src/globals.css';
 
-{
-    /* pages */
-}
-import Header from './components/Header';
-import Footer from './components/Footer';
+/* components */
+import Header from './components/header';
+import Footer from './components/footer';
+import BottomTab from './components/bottom-tab';
+
+/* pages */
 import Home from './pages/home';
 import Payment from './pages/payment';
 import Mypage from './pages/mypage';
-
-{
-    /* icons */
-}
-import payment from './assets/icons/payment.png';
-import home from './assets/icons/home.png';
-import mypage from './assets/icons/mypage.png';
 
 const App = () => {
     const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken'));
@@ -46,54 +40,6 @@ const App = () => {
                 <Footer />
                 <BottomTab />
             </BrowserRouter>
-        </div>
-    );
-};
-
-const BottomTab = () => {
-    const location = useLocation();
-
-    return (
-        <div className="bottom-tab">
-            <Link
-                to="/payment"
-                style={{
-                    textDecoration: 'none',
-                    color: location.pathname === '/payment' ? '#007BFF' : '#000',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                }}
-            >
-                <img src={payment} alt="Payment" style={{ height: '24px' }} />
-                <div>Payment</div>
-            </Link>
-            <Link
-                to="/"
-                style={{
-                    textDecoration: 'none',
-                    color: location.pathname === '/' ? '#007BFF' : '#000',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                }}
-            >
-                <img src={home} alt="Home" style={{ height: '24px' }} />
-                <div>Home</div>
-            </Link>
-            <Link
-                to="/mypage"
-                style={{
-                    textDecoration: 'none',
-                    color: location.pathname === '/mypage' ? '#007BFF' : '#000',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                }}
-            >
-                <img src={mypage} alt="Mypage" style={{ height: '24px' }} />
-                <div>My Page</div>
-            </Link>
         </div>
     );
 };
