@@ -62,7 +62,8 @@ const BottomTab = () => {
                         location.pathname === '/' ||
                         location.pathname === '/my-store' ||
                         location.pathname === '/public-store' ||
-                        location.pathname === '/private-store'
+                        location.pathname === '/private-store' ||
+                        location.pathname === '/qr'
                             ? '#007BFF'
                             : '#000',
                     display: 'flex',
@@ -76,7 +77,8 @@ const BottomTab = () => {
                         location.pathname === '/' ||
                         location.pathname === '/my-store' ||
                         location.pathname === '/public-store' ||
-                        location.pathname === '/private-store'
+                        location.pathname === '/private-store' ||
+                        location.pathname === '/qr'
                             ? homeColor
                             : home
                     }
