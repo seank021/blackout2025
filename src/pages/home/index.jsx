@@ -19,7 +19,7 @@ const Home = () => {
             navigate('/mypage'); // accessToken이 없으면 MyPage로 리디렉션
         }
     }, [navigate]);
-    
+
     return (
         <div className="home-container">
             {/* Logo */}

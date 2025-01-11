@@ -35,7 +35,11 @@ const BottomTab = () => {
                     cursor: 'pointer',
                 }}
             >
-                <img src={location.pathname === '/payment' ? paymentColor : payment} alt="Payment" style={{ width: '24px', height: '24px' }} />
+                <img
+                    src={location.pathname === '/payment' ? paymentColor : payment}
+                    alt="Payment"
+                    style={{ width: '24px', height: '24px' }}
+                />
                 <div className="text-sm">선결제</div>
             </div>
             <div
@@ -55,7 +59,11 @@ const BottomTab = () => {
                     cursor: 'pointer',
                 }}
             >
-                <img src={location.pathname === '/' ? homeColor : home} alt="Home" style={{ width: '24px', height: '24px' }} />
+                <img
+                    src={location.pathname === '/' ? homeColor : home}
+                    alt="Home"
+                    style={{ width: '24px', height: '24px' }}
+                />
                 <div className="text-sm">홈</div>
             </div>
             <div
@@ -69,7 +77,11 @@ const BottomTab = () => {
                     cursor: 'pointer',
                 }}
             >
-                <img src={location.pathname === '/mypage' ? mypageColor : mypage} alt="Mypage" style={{ width: '24px', height: '24px' }} />
+                <img
+                    src={location.pathname === '/mypage' ? mypageColor : mypage}
+                    alt="Mypage"
+                    style={{ width: '24px', height: '24px' }}
+                />
                 <div className="text-sm">My</div>
             </div>
         </div>
