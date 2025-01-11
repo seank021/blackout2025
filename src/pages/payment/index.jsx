@@ -4,11 +4,9 @@ import '../../../src/styles/globals.css';
 import Kakaomap from './kakaomap';
 import '../../styles/home.css';
 import logo from '../../assets/icons/logo-small.svg';
-import { useNavigate } from 'react-router-dom';
 
 const Payment = () => {
     const navigate = useNavigate();
-
 
     useEffect(() => {
         const accessToken = localStorage.getItem('accessToken');
@@ -16,7 +14,6 @@ const Payment = () => {
             navigate('/mypage'); // accessToken이 없으면 MyPage로 리디렉션
         }
     }, [navigate]);
-
 
     return (
         <div className="container-col">
