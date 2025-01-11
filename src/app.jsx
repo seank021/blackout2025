@@ -11,19 +11,33 @@ import BottomTab from './components/bottom-tab';
 import Home from './pages/home';
 import Payment from './pages/payment';
 import Mypage from './pages/mypage';
+import Splash from './pages/splash';
 
 const App = () => {
     const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken'));
+    const [showSplash, setShowSplash] = useState(true);
+
     useEffect(() => {
+        // Hide splash screen after 0.7 second
+        const splashTimeout = setTimeout(() => {
+            setShowSplash(false);
+        }, 700);
+
+        // Listen for localStorage changes
         const handleStorageChange = () => {
             setAccessToken(localStorage.getItem('accessToken'));
         };
         window.addEventListener('storage', handleStorageChange);
 
         return () => {
+            clearTimeout(splashTimeout);
             window.removeEventListener('storage', handleStorageChange);
         };
     }, []);
+
+    if (showSplash) {
+        return <Splash />;
+    }
 
     return (
         <div className="container-col">
