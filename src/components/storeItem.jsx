@@ -32,7 +32,7 @@ function StoreItem({ store, totalAmount, title }) {
                     </div>
                     <div className="flex justify-end items-center mt-2">
                         <div className="text-black text-[10px]">남은 선결제 금액</div>
-                        <div className="text-[#0763c2] text-[17px] font-semibold ml-2">{totalAmount}원</div>
+                        <div className="text-[#0763c2] text-[17px] font-semibold ml-2">{totalAmount.toLocaleString()}원</div>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@ function StoreItem({ store, totalAmount, title }) {
                                             <span className="text-sm text-gray-700">paid by</span>
                                             <span className="text-sm text-gray-800 font-bold">{prepay.username}</span>
                                         </div>
-                                        <span className="text-sm text-blue-500">{prepay.credit}원</span>
+                                        <span className="text-sm text-blue-500">{prepay.credit.toLocaleString()}원</span>
                                     </li>
                                 ))}
                             </ul>
@@ -71,7 +71,7 @@ function StoreItem({ store, totalAmount, title }) {
                                             <span className="text-sm text-gray-700">paid by</span>
                                             <span className="text-sm text-gray-800 font-bold">{prepay.username}</span>
                                         </div>
-                                        <span className="text-sm text-blue-500">{prepay.credit}원</span>
+                                        <span className="text-sm text-blue-500">{prepay.credit.toLocaleString()}원</span>
                                     </li>
                                 ))}
                             </ul>
@@ -86,7 +86,7 @@ function StoreItem({ store, totalAmount, title }) {
                                             <span className="text-sm text-gray-700">paid by</span>
                                             <span className="text-sm text-gray-800 font-bold">{prepay.username}</span>
                                         </div>
-                                        <span className="text-sm text-blue-500">{prepay.credit}원</span>
+                                        <span className="text-sm text-blue-500">{prepay.credit.toLocaleString()}원</span>
                                     </li>
                                 ))}
                             </ul>
