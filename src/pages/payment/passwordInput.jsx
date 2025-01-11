@@ -1,17 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import backBtn from '../../assets/icons/backBtn.svg';
-import Web3 from 'web3'; // Web3.js 라이브러리
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import Web3 from 'web3';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { contractABI } from '../../constants/abi';
+import LoadingSpinner from '../../components/LoadingSpinner';
+
 function PasswordInput() {
-    const { place } = useLocation().state;
+    const { place, privateKey, credit, storeType } = useLocation().state;
     const navigate = useNavigate();
-
     const inputRef = useRef(null);
-
-    // State for input values
     const [password, setPassword] = useState('');
-    const [credit, setCredit] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (inputRef.current) {
@@ -21,44 +20,65 @@ function PasswordInput() {
     }, []);
 
     const handleAddCredit = async () => {
-        // 컨트랙트 정보
-        const contractABI = contractABI;
-
-        const contractAddress = '0x2aF6d726B110747F02AFaAa9a23d63B1d85D9878';
-
-        // Web3 설정
-        const web3 = new Web3(Web3.givenProvider || 'https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID');
-
-        // 사용자 입력값
-        const storeName = place || 'defaultStore'; // 상점 이름
-        const signer = '0xSignerAddress'; // 크레딧 소유자의 주소
-        const recordType = 'exampleRecordType'; // 레코드 유형
-        const inputPassword = password; // 비밀번호
-        const creditAmount = web3.utils.toWei(credit, 'ether'); // 크레딧 값 (예시로 ETH 사용)
-
-        // 컨트랙트 인스턴스 생성
-        const contract = new web3.eth.Contract(contractABI, contractAddress);
+        setIsLoading(true);
+        const contractAddress = localStorage.getItem('walletAddress');
 
         try {
-            // 현재 사용자의 계정 가져오기
-            const accounts = await web3.eth.requestAccounts();
-            const account = accounts[0];
+            const web3 = new Web3(
+                Web3.givenProvider || 'https://eth-sepolia.g.alchemy.com/v2/qrFrgtCIqd6BTonkCCFTZ1oFth75Ux5H'
+            );
 
-            // 트랜잭션 생성
-            await contract.methods
-                .addCredit(storeName, signer, recordType, inputPassword, creditAmount)
-                .send({ from: account });
+            const storeName = place.place_name || 'defaultStore';
+            const signer = contractAddress;
+            const recordType = storeType;
+            const inputPassword = password;
+            const creditAmount = web3.utils.toWei(credit, 'ether');
 
-            alert('크레딧 추가 성공!');
+            const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+            const data = contract.methods
+                .addCredit(
+                    storeName,
+                    signer,
+                    recordType,
+                    inputPassword,
+                    creditAmount,
+                    '0x4c9b625E989587aDFB1104a28D60D0E1c1F15caE'
+                )
+                .encodeABI();
+
+            const tx = {
+                from: contractAddress,
+                to: '0x4c9b625E989587aDFB1104a28D60D0E1c1F15caE',
+                gas: 210000,
+                maxPriorityFeePerGas: web3.utils.toWei('2', 'gwei'),
+                maxFeePerGas: web3.utils.toWei('50', 'gwei'),
+                data: data,
+            };
+
+            const signedTx = await web3.eth.accounts.signTransaction(tx, privateKey);
+            const receipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+
+            console.log('트랜잭션 성공:', receipt);
+            alert('결제가 성공되었어요 !');
+            navigate('/');
         } catch (error) {
-            console.error('크레딧 추가 실패:', error);
-            alert('크레딧 추가에 실패했습니다. 다시 시도해주세요.');
+            console.error('트랜잭션 실패:', error);
+            alert('결제에 실패했습니다. 다시 시도해주세요.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
     return (
-        <div className="container-col ">
-            <img className="absolute top-[20px] left-[20px]" src={backBtn} alt="logo" onClick={() => navigate(-1)} />
+        <div className="container-col">
+            {isLoading && <LoadingSpinner />}
+            <img
+                className="absolute top-[20px] left-[20px]"
+                src={backBtn}
+                alt="logo"
+                onClick={() => !isLoading && navigate(-1)}
+            />
             <div className="flex items-center justify-center gap-[100px] mt-[25px]">
                 <div className="text-black text-lg font-bold font-['Inter'] leading-7 mt-[2px]">선결제하기</div>
             </div>
@@ -77,21 +97,24 @@ function PasswordInput() {
                             </div>
                         </div>
                         <input
+                            onChange={e => setPassword(e.target.value)}
                             ref={inputRef}
                             className="w-[80vw] rounded-[12px] border-gray-400 self-stretch text-[24px] font-bold font-['Inter'] leading-7 py-[5px]"
                             placeholder="비밀번호를 입력해주세요"
+                            type="password"
+                            disabled={isLoading}
                         />
                     </div>
-                    <div className="flex flex-col items-center justify-center gap-[3px]  "></div>
                 </div>
-                <div className="w-[80vw] h-10 relative mt-[10px]">
-                    <div
-                        onClick={handleAddCredit}
-                        className="w-[100%] h-10 left-0 top-0 absolute bg-[#c4dcf7] rounded-[10px] flex items-center justify-center text-black text-center font-['Inter'] text-[12px] font-bold"
-                    >
-                        결제하기
-                    </div>
-                </div>
+                <button
+                    onClick={handleAddCredit}
+                    disabled={isLoading}
+                    className={`w-[80vw] h-10 rounded-[10px] flex items-center justify-center text-black text-center font-['Inter'] text-[12px] font-bold ${
+                        isLoading ? 'bg-gray-300 cursor-not-allowed' : 'bg-[#c4dcf7] cursor-pointer'
+                    }`}
+                >
+                    {isLoading ? '처리중...' : '결제하기'}
+                </button>
             </div>
         </div>
     );

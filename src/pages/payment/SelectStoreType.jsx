@@ -1,11 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import backBtn from '../../assets/icons/backBtn.svg';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 function SelectStoreType() {
     const navigate = useNavigate();
 
-    const { place } = useLocation().state;
+    const { place, credit, privateKey } = useLocation().state;
+
+    const [storeType, setStoreType] = useState('');
 
     return (
         <div className="container-col items-center justify-center">
@@ -25,7 +27,20 @@ function SelectStoreType() {
                     <div className="self-stretch h-[94px] p-2.5 flex-col justify-start items-start gap-2.5 flex">
                         <div className="self-stretch h-[74px] px-[17px] py-[9px] bg-[#8fc2fa]/5 rounded-[7px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] flex-col justify-start items-start gap-2.5 flex overflow-hidden">
                             <div className="self-stretch h-14 flex-col justify-center items-center flex">
-                                <div>
+                                <div
+                                    onClick={() => {
+                                        setStoreType('public');
+                                        navigate('/payment/password-input', {
+                                            state: {
+                                                place: place,
+                                                credit: credit,
+                                                privateKey: privateKey,
+                                                storeType: 'public',
+                                            },
+                                        });
+                                    }}
+                                    className={`${storeType === 'public' ? 'text-[#0763c2]' : 'text-black'}`}
+                                >
                                     <span className="text-[#0763c2] text-[17px] font-bold font-['Inter'] leading-7">
                                         퍼블릭
                                     </span>
@@ -42,7 +57,20 @@ function SelectStoreType() {
                     <div className="self-stretch h-[94px] p-2.5 flex-col justify-start items-start gap-2.5 flex">
                         <div className="self-stretch h-[74px] px-[17px] py-[9px] bg-[#8fc2fa]/5 rounded-[7px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] flex-col justify-start items-start gap-2.5 flex overflow-hidden">
                             <div className="self-stretch h-14 flex-col justify-center items-center flex">
-                                <div onClick={() => navigate('/payment/password-input', { state: { place: place } })}>
+                                <div
+                                    className={`${storeType === 'private' ? 'text-[#0763c2]' : 'text-black'}`}
+                                    onClick={() => {
+                                        setStoreType('private');
+                                        navigate('/payment/password-input', {
+                                            state: {
+                                                place: place,
+                                                credit: credit,
+                                                privateKey: privateKey,
+                                                storeType: 'private',
+                                            },
+                                        });
+                                    }}
+                                >
                                     <span className="text-[#0763c2] text-[17px] font-bold font-['Inter'] leading-7">
                                         프라이빗
                                     </span>
