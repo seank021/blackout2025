@@ -89,27 +89,52 @@ function PasswordInput() {
                 <div className="text-black text-lg font-bold font-['Inter'] leading-7 mt-[2px]">선결제하기</div>
             </div>
             <div className="w-[100vw] h-[86vh] items-center justify-center flex-col gap-[41px] inline-flex">
-                <div className="self-stretch h-[138px] flex-col justify-start items-center gap-[17px] inline-flex">
+                <div
+                    className={`self-stretch h-[138px] flex-col justify-start items-center gap-[17px] inline-flex ${
+                        storeType === 'public' ? 'h-[60px]' : ''
+                    }`}
+                >
                     <div className="h-[101px] flex-col justify-start items-start gap-[18px] flex">
-                        <div className="self-stretch justify-start items-center gap-[5px] inline-flex">
-                            <div>
-                                <span className="text-black text-sm font-medium font-['Inter'] leading-7">
-                                    마지막으로
-                                    <br />
-                                </span>
-                                <span className="text-black text-lg font-bold font-['Inter'] leading-7">
-                                    선결제 매장 이용 시 사용해야 하는
-                                </span>
+                        {storeType !== 'public' ? (
+                            <div className="self-stretch justify-start items-center gap-[5px] inline-flex">
+                                <div>
+                                    <span className="text-black text-sm font-medium font-['Inter'] leading-7">
+                                        마지막으로
+                                        <br />
+                                    </span>
+                                    <span className="text-black text-lg font-bold font-['Inter'] leading-7">
+                                        선결제 매장 이용 시 사용해야 하는
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <input
-                            onChange={e => setPassword(e.target.value)}
-                            ref={inputRef}
-                            className="w-[80vw] rounded-[12px] border-gray-400 self-stretch text-[24px] font-bold font-['Inter'] leading-7 py-[5px]"
-                            placeholder="비밀번호를 입력해주세요"
-                            type="password"
-                            disabled={isLoading}
-                        />
+                        ) : (
+                            <div className="w-[80vw] self-stretch flex-col justify-start items-start gap-[5px] inline-flex">
+                                <div>
+                                    <span className="text-black text-2xl font-bold font-['Inter'] leading-7 mr-[5px]">
+                                        {place.place_name}
+                                    </span>
+                                    <span className="text-black text-m font-medium font-['Inter'] leading-7">에</span>
+                                </div>
+                                <div>
+                                    <span className="text-[#0763C2] text-2xl font-bold font-['Inter'] leading-7 mr-[5px]">
+                                        {credit}원
+                                    </span>
+                                    <span className="text-black text-m font-medium font-['Inter'] leading-7">
+                                        을 결제할까요?
+                                    </span>
+                                </div>
+                            </div>
+                        )}
+                        {storeType !== 'public' ? (
+                            <input
+                                onChange={e => setPassword(e.target.value)}
+                                ref={inputRef}
+                                className="w-[80vw] rounded-[12px] border-gray-400 self-stretch text-[24px] font-bold font-['Inter'] leading-7 py-[5px]"
+                                placeholder="비밀번호를 입력해주세요"
+                                type="password"
+                                disabled={isLoading}
+                            />
+                        ) : null}
                     </div>
                 </div>
                 <button
