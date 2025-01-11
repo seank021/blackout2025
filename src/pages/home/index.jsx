@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
-        <div className='home-container'>
+        <div className="home-container">
             {/* Logo */}
             <div className="logo-container">
                 <img src={logo} alt="PrePay Logo" className="logo" />
@@ -25,7 +25,7 @@ const Home = () => {
             <div className="card-container">
                 {/* My Store */}
                 <Link className="large-card" to="/my-store">
-                    <div className='flex flex-col'>
+                    <div className="flex flex-col">
                         <div className="flex items-center">
                             <h2 className="card-title-big">마이 스토어</h2>
                             <img src={arrow} alt="Arrow" className="w-[12px] h-[24px] ml-[5px]" />
