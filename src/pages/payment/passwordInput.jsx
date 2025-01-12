@@ -21,7 +21,7 @@ function PasswordInput() {
 
     const handleAddCredit = async () => {
         setIsLoading(true);
-        const contractAddress = '0x0aaFfbcF6050dAe35fc58CF1Fc12f103AFAdADF4';
+        const contractAddress = '0xe296dB5dc9779B6eEF1411966196657104F4C3D7';
         const walletAddress = localStorage.getItem('walletAddress');
 
         try {
@@ -39,8 +39,10 @@ function PasswordInput() {
 
             const storeAddress =
                 recordType === 'private'
-                    ? '0x4c9b625E989587aDFB1104a28D60D0E1c1F15caE'
+                    ? '0xD2539f4b7aEc9d07D755c12A965e28c09a25065B'
                     : '0x860E57F925F51de2b7B365c523758CD8eA8CCE35';
+
+            console.log(storeName, signer, recordType, inputPassword, creditAmount, storeAddress, contractAddress);
 
             const data = contract.methods
                 .addCredit(
@@ -55,7 +57,7 @@ function PasswordInput() {
 
             const tx = {
                 from: walletAddress, // 사용자 지갑 주소
-                to: storeAddress, // 가게 지갑 주소
+                to: contractAddress, // 가게 지갑 주소
                 gas: 210000,
                 maxPriorityFeePerGas: web3.utils.toWei('2', 'gwei'),
                 maxFeePerGas: web3.utils.toWei('50', 'gwei'),
