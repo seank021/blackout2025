@@ -14,7 +14,6 @@ const titleMap = {
 function Store({ title }) {
     const navigate = useNavigate();
     const [store, setStore] = useState(null);
-    const [totalAmount, setTotalAmount] = useState(0);
 
     useEffect(() => {
         const fetchStore = async () => {
@@ -24,37 +23,23 @@ function Store({ title }) {
         fetchStore();
     }, [title]);
 
-    useEffect(() => {
-        if (store) {
-            console.log(store);
-            let total = 0;
-            store.forEach(item => {
-                if (title === '마이') {
-                    if (item.my_prepay) {
-                        item.my_prepay.forEach(prepay => {
-                            total += prepay.credit;
-                        });
-                    }
-                } else if (title === '퍼블릭') {
-                    if (item.public_prepay) {
-                        console.log(item.public_prepay);
-                        item.public_prepay.forEach(prepay => {
-                            total += prepay.credit;
-                        });
-                    }
-                } else if (title === '프라이빗') {
-                    if (item.private_prepay) {
-                        item.private_prepay.forEach(prepay => {
-                            total += prepay.credit;
-                        });
-                    }
-                } else {
-                    return;
-                }
+    const calculateTotalAmount = (item) => {
+        let total = 0;
+        if (title === '마이' && item.my_prepay) {
+            item.my_prepay.forEach(prepay => {
+                total += prepay.credit;
             });
-            setTotalAmount(total);
+        } else if (title === '퍼블릭' && item.public_prepay) {
+            item.public_prepay.forEach(prepay => {
+                total += prepay.credit;
+            });
+        } else if (title === '프라이빗' && item.private_prepay) {
+            item.private_prepay.forEach(prepay => {
+                total += prepay.credit;
+            });
         }
-    }, [store]);
+        return total;
+    };
 
     return (
         <div className="w-full h-full">
@@ -68,7 +53,12 @@ function Store({ title }) {
             {store && (
                 <div className="flex flex-col gap-[20px] mt-[20px] justify-center items-center">
                     {store.map(item => (
-                        <StoreItem key={item.id} store={item} totalAmount={totalAmount} title={title} />
+                        <StoreItem
+                            key={item.id}
+                            store={item}
+                            totalAmount={calculateTotalAmount(item)}
+                            title={title}
+                        />
                     ))}
                 </div>
             )}
