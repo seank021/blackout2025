@@ -40,7 +40,7 @@ function PasswordInput() {
             const storeAddress =
                 recordType === 'private'
                     ? '0xD2539f4b7aEc9d07D755c12A965e28c09a25065B'
-                    : '0x860E57F925F51de2b7B365c523758CD8eA8CCE35';
+                    : '0xD2539f4b7aEc9d07D755c12A965e28c09a25065B';
 
             console.log(storeName, signer, recordType, inputPassword, creditAmount, storeAddress, contractAddress);
 
