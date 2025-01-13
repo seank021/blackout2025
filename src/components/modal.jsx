@@ -18,7 +18,7 @@ const PasswordModal = ({ isOpen, onClose, onConfirm, prepayId }) => {
                 <input
                     type="text"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={e => setPassword(e.target.value)}
                     placeholder="비밀번호를 입력하세요"
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors mb-4"
                 />

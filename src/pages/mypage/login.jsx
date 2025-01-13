@@ -15,7 +15,7 @@ const Login = ({ setIsLoggedIn }) => {
             alert('아이디와 비밀번호를 입력해주세요.');
             return;
         }
-        
+
         const response = await logIn({ username, password });
         console.log(response);
         if (response.status === 200) {

@@ -23,7 +23,7 @@ function Store({ title }) {
         fetchStore();
     }, [title]);
 
-    const calculateTotalAmount = (item) => {
+    const calculateTotalAmount = item => {
         let total = 0;
         if (title === '마이' && item.my_prepay) {
             item.my_prepay.forEach(prepay => {
@@ -53,12 +53,7 @@ function Store({ title }) {
             {store && (
                 <div className="flex flex-col gap-[20px] mt-[20px] justify-center items-center">
                     {store.map(item => (
-                        <StoreItem
-                            key={item.id}
-                            store={item}
-                            totalAmount={calculateTotalAmount(item)}
-                            title={title}
-                        />
+                        <StoreItem key={item.id} store={item} totalAmount={calculateTotalAmount(item)} title={title} />
                     ))}
                 </div>
             )}

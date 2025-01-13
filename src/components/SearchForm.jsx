@@ -11,7 +11,7 @@ const SearchForm = ({ onSearch }) => {
                 }}
                 className="flex items-center justify-center"
             >
-                <div className="relative flex items-center w-[95%] max-w-xl">                    
+                <div className="relative flex items-center w-[95%] max-w-xl">
                     {/* Input Field */}
                     <input
                         type="text"
@@ -21,10 +21,7 @@ const SearchForm = ({ onSearch }) => {
                     />
 
                     {/* Search Icon Button */}
-                    <button
-                        type="submit"
-                        className="absolute right-3 flex items-center justify-center w-6 h-6"
-                    >
+                    <button type="submit" className="absolute right-3 flex items-center justify-center w-6 h-6">
                         <img src={searchIcon} alt="Search Icon" className="w-full h-full" />
                     </button>
                 </div>

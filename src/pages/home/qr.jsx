@@ -38,6 +38,6 @@ const QR = () => {
             </div>
         </div>
     );
-}
+};
 
 export default QR;
