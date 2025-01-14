@@ -30,5 +30,8 @@
 
 <br/>
 
+### Splash
+![splash](https://github.com/user-attachments/assets/53565b79-66e9-4db8-873d-8b033a084d81)
+
 ### 시연 영상
 ![오삼숙이](https://github.com/user-attachments/assets/c8156d61-3496-4969-8d2f-1f76f111231d)
